@@ -6,8 +6,8 @@ export const fetchRecords = async ({
 }: {
   pageParam: number;
 }): Promise<IProduct[]> => {
-  return new Promise(async (res, rej) => {
-    const loadCount: number = 10;
+  return new Promise(async (res) => {
+    // const loadCount: number = 10;
 
     let apiResp = await axios.get(
       import.meta.env.VITE_BACKEND_BASE_URL +
@@ -20,11 +20,5 @@ export const fetchRecords = async ({
     } else {
       res([]);
     }
-  });
-};
-
-export const addRecords = () => {
-  return new Promise((res, rej) => {
-    res("");
   });
 };

@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import PageHeader from "../PageHeader";
 import RecordCard from "../RecordCard";
 import { fetchRecords } from "@/utils/ApiCalls";
-import { QueryClient, useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import BlurFade from "../magicui/blur-fade";
 import { useDispatch } from "react-redux";
 import { setLoadedCount } from "@/Redux/ProductsRedux/themeActions";
@@ -10,7 +10,7 @@ import { setLoadedCount } from "@/Redux/ProductsRedux/themeActions";
 const ApproachOne = () => {
   const dispatch = useDispatch();
 
-  const { data, error, fetchNextPage, hasNextPage, isFetching, isLoading } =
+  const { data, fetchNextPage, hasNextPage, isFetching, isLoading } =
     useInfiniteQuery({
       queryKey: ["products"],
       queryFn: ({ pageParam }) => {
