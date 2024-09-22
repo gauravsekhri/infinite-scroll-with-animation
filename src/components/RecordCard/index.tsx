@@ -11,8 +11,12 @@ const RecordCard = ({ productId, productName, country }: IProduct) => {
     <>
       <Card key={productId}>
         <CardHeader>
-          <CardTitle className="text-lg">{productName ?? ""}</CardTitle>
-          <CardDescription>Country : {country ?? ""}</CardDescription>
+          <CardTitle className="text-md lg:text-lg">
+            {productName ?? ""}
+          </CardTitle>
+          <CardDescription className="text-sm lg:text-md">
+            Country : {country ?? ""}
+          </CardDescription>
         </CardHeader>
       </Card>
     </>
