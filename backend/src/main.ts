@@ -1,9 +1,35 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { json, urlencoded } from 'express';
+// import * as cors from 'cors';
+// import cors
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.enableCors();
-  await app.listen(3000);
+  const app = await NestFactory.create(AppModule, {
+    cors: true,
+  });
+  app.enableCors({
+    origin: '*',
+    methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true,
+    allowedHeaders:
+      'Origin, X-Requested-With, Content-Type, Accept, Authentication, Access-control-allow-credentials, Access-control-allow-headers, Access-control-allow-methods, Access-control-allow-origin, User-Agent, Referer, Accept-Encoding, Accept-Language, Access-Control-Request-Headers, Cache-Control, Pragma, clientTime, Authorization',
+  });
+
+  // app.use(function (req, res, next) {
+  //   res.header('Access-Control-Allow-Origin', '*');
+  //   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  //   res.header('Access-Control-Allow-Credentials', true);
+  //   res.header(
+  //     'Access-Control-Allow-Headers',
+  //     'Content-Type, Authorization, Content-Length, X-Requested-With, Accept',
+  //   );
+  // });
+  // app.use(cors())
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
+  await app.listen(5000);
 }
 bootstrap();
